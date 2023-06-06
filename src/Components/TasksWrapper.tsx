@@ -103,6 +103,9 @@ export default function TasksWrapper() {
   useEffect(() => {
     getDataFromLocalStorage();
   }, []);
+  useEffect(() => {
+    syncLocalStorage();
+  }, [dataParsed]);
 
   return (
     <>
