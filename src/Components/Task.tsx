@@ -1,17 +1,26 @@
 import React from "react"
+
+type Props = {
+  id:number
+  taskName:string
+  assignee:string
+  onComplete:(id:number)=>void
+  onDelete:(id:number)=>void
+  done:boolean
+}
 export default function Task({
   id,
-  taskname,
+  taskName,
   assignee,
   onComplete,
   onDelete,
   done
-}) {
+}:Props) {
   return (
     <div key={id}>
       <div className='taskDiv d-flex justify-content-between'>
         <div>
-          <p>{taskname}</p>
+          <p>{taskName}</p>
           <p>{assignee}</p>
         </div>
 

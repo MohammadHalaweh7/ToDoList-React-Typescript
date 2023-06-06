@@ -1,13 +1,22 @@
 import React from "react"
 
-export default function TasksControl({
+type Props = {
+  setToggle: React.Dispatch<React.SetStateAction<boolean>>
+  setToken: React.Dispatch<React.SetStateAction<string>>
+  tasksCount: number
+  completedTasksCount: number
+  toggle: boolean
+  token: string
+}
+
+export default function TasksControls({
   setToggle,
   setToken,
   tasksCount,
   completedTasksCount,
   toggle,
   token
-}) {
+}:Props) {
 
   return (
     <>
@@ -17,8 +26,8 @@ export default function TasksControl({
             className='form-check-input'
             type='checkbox'
             id='toggledBtn'
-            value={toggle}
-            onClick={(e) => {
+            value={toggle.toString()}
+            onChange={(e) => {
               console.log(e.target.checked)
               setToggle(e.target.checked)
             }}

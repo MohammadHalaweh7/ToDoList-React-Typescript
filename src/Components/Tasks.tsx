@@ -1,12 +1,13 @@
 import React from "react";
 import Task from "./Task";
+import { TaskListProps } from "./TaskList";
 
-export default function Tasks({ tasks, onComplete, onDelete, toggle, token }) {
-  const filteredTasks = tasks.filter(
+export default function Tasks({ dataParsed, onComplete, onDelete, toggle, token }:TaskListProps) {
+  const filteredTasks = dataParsed.filter(
     (task) =>
       task.done === toggle &&
       (token
-        ? task.taskname?.toLowerCase().includes(token.toLowerCase())
+        ? task.taskName?.toLowerCase().includes(token.toLowerCase())
         : true)
   );
 
@@ -17,7 +18,6 @@ export default function Tasks({ tasks, onComplete, onDelete, toggle, token }) {
           {...task}
           onComplete={onComplete}
           onDelete={onDelete}
-          toggle={toggle}
         />
       ))}
     </>

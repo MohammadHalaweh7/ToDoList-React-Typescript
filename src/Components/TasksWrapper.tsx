@@ -4,13 +4,19 @@ import TasksControls from "./TasksControls";
 import AddTaskModal from "./AddTaskModal";
 import Swal from "sweetalert2";
 
+export type Todo = {
+  id: number,
+  taskName:string,
+  assignee:string,
+  done:boolean,
+}
 export default function TasksWrapper() {
-  const [dataParsed, setDataParsed] = useState([
-    { id: 0, taskname: "Hello", assignee: "World", done: false },
-    { id: 1, taskname: "Hello2", assignee: "World2", done: true },
+  const [dataParsed, setDataParsed] = useState<Todo[]>([
+    { id: 0, taskName: "Hello", assignee: "World", done: false },
+    { id: 1, taskName: "Hello2", assignee: "World2", done: true },
   ]);
-  const [toggle, setToggle] = useState(false);
-  const [token, setToken] = useState("");
+  const [toggle, setToggle] = useState<boolean>(false);
+  const [token, setToken] = useState<string>("");
 
   const tasksCount = dataParsed.length;
   const completedTasksCount = dataParsed.filter((task) => task.done).length;
@@ -26,25 +32,25 @@ export default function TasksWrapper() {
     Swal.fire("Good job!", "You clicked the button!", "success");
   }
 
-  const parseData = (data) => {
+  const parseData = (data:Todo[]) => {
     return JSON.stringify(data);
   };
 
   function getDataFromLocalStorage() {
     try {
       const jsonFormatData = localStorage.getItem(LOCALSTORAGE_KEY);
-      const todos = JSON.parse(jsonFormatData) || [];
+      const todos = JSON.parse(jsonFormatData || "[]") || [];
       setDataParsed(todos);
     } catch {
       return [];
     }
   }
 
-  function onAddClick(taskname, assignee) {
+  function onAddClick(taskName:string, assignee:string) {
     const dataObject = {
       id: dataParsed.length,
       done: false,
-      taskname,
+      taskName,
       assignee,
     };
 
@@ -56,7 +62,7 @@ export default function TasksWrapper() {
     showSuccessPopup();
   }
 
-  function onComplete(id) {
+  function onComplete(id:number) {
     console.log(id);
     const updatedData = dataParsed.map((element) => {
       if (element.id === id) {
@@ -71,7 +77,7 @@ export default function TasksWrapper() {
     showSuccessPopup();
   }
 
-  function onDelete(id) {
+  function onDelete(id:number) {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",

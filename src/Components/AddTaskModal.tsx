@@ -1,14 +1,18 @@
 import React, { useState } from "react";
 
-export default function Modal({ onAddClick }) {
-  const [taskName, setTaskName] = useState();
-  const [assignee, setAssignee] = useState();
+type Prop={
+  onAddClick:(taskName:string,assignee:string)=>void
+}
+
+export default function Modal({ onAddClick }:Prop) {
+  const [taskName, setTaskName] = useState<string>("");
+  const [assignee, setAssignee] = useState<string>("");
 
   return (
     <div
       className="modal fade"
       id="exampleModal"
-      tabIndex="-1"
+      tabIndex={-1}
       aria-labelledby="exampleModalLabel"
       aria-hidden="true"
     >
